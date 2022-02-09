@@ -55,15 +55,12 @@ async function getEncodeInfo(cb) {
     directAccess: true,
   };
 
-  var g_protectedFiles = [
-    path.resolve(__dirname, "data", "encodedData.json.p7s.p7e"),
-    path.resolve(
-      __dirname,
-      "data",
-      "internal-passport-2858364170864-02.04.2021-09_48_26.pdf.p7s.p7e"
-    ),
-  ];
-
+  var g_protectedFiles = [];
+  fs.readdirSync("./data").forEach((file) => {
+    if (file.includes("p7e")) {
+      g_protectedFiles.push(path.resolve(__dirname, "data", file));
+    }
+  });
   //-----------------------------------------------------------------------------
 
   /* Налаштування ос. ключа */

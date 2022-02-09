@@ -14,6 +14,7 @@ const upload = multer({ storage: storage });
 const diiaController = require("./diiaController");
 
 const router = new Router();
+
 const decodedFiles = async (req, res, next) => {
   await getEncodeInfo((err, result) => {
     console.log(result);
@@ -21,11 +22,6 @@ const decodedFiles = async (req, res, next) => {
       next();
     }
   });
-
-  // setTimeout(function () {
-  //   next();
-  // }, 5000);
-  // next();
 };
 
 router.post("/", upload.any(), decodedFiles, diiaController);

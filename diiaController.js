@@ -13,7 +13,10 @@ const diiaController = async (req, res) => {
       return data;
     });
     console.log("dataEncoded", JSON.parse(dataEncoded));
-    return res.status(200).json(req.body);
+    fs.readdirSync("./data").forEach((file) => {
+      fs.unlinkSync(path.resolve(__dirname, "data", file));
+    });
+    return res.status(200).json({ success: true });
   } catch (err) {
     console.log(err);
     res.status(400).json({ message: "Something went wrong" });
